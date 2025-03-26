@@ -21,6 +21,7 @@ end
 
 # Contains the main board and functionality
 class Game
+  attr_accessor :board
   def initialize
     @board = Array.new(9) { |n| n + 1 }
   end
@@ -41,59 +42,60 @@ class Game
 
   # Check's if the move is playable
   def legal_move?(position)
-    true if position.between?(1, 9) && position.is_a?(Integer) && @board[position - 1].is_a?(Integer)
+    return true if position.between?(1, 9) && position.is_a?(Integer) && @board[position - 1].is_a?(Integer)
+    false
   end
 
   # Module for when the game ends, includes winning and full functions
   include GameEnd
 end
 
-my_board = Game.new
+# my_board = Game.new
 
-puts "Let's play Naughts and crosses"
-puts ''
-puts 'This is the board you will be playing on.'
-sleep 1
-my_board.print_board
-sleep 3
-puts 'Choose the number of the square where you would like to put your letter.'
-sleep 2
-puts ''
-puts 'Player 1 will be X and player 2 to will be O'
-puts ''
+# puts "Let's play Naughts and crosses"
+# puts ''
+# puts 'This is the board you will be playing on.'
+# sleep 1
+# my_board.print_board
+# sleep 3
+# puts 'Choose the number of the square where you would like to put your letter.'
+# sleep 2
+# puts ''
+# puts 'Player 1 will be X and player 2 to will be O'
+# puts ''
 
-$win = 0
-num = 1
+# $win = 0
+# num = 1
 
-until $win == 1
-  num += 1
-  letter = if num.even?
-             'X'
-           else
-             'O'
-           end
+# until $win == 1
+#   num += 1
+#   letter = if num.even?
+#              'X'
+#            else
+#              'O'
+#            end
 
-  puts "Player #{letter}, where would you like to play (1 - 9)"
-  position = gets.chomp.to_i
-  puts ''
+#   puts "Player #{letter}, where would you like to play (1 - 9)"
+#   position = gets.chomp.to_i
+#   puts ''
 
-  until my_board.legal_move?(position) == true
-    puts 'That is an invalid move, please try again.'
-    puts "Player #{letter}, where would you like to play (1-9)"
-    position = gets.chomp.to_i
-    puts ''
-  end
+#   until my_board.legal_move?(position) == true
+#     puts 'That is an invalid move, please try again.'
+#     puts "Player #{letter}, where would you like to play (1-9)"
+#     position = gets.chomp.to_i
+#     puts ''
+#   end
 
-  my_board.move(position, letter)
-  my_board.print_board
+#   my_board.move(position, letter)
+#   my_board.print_board
 
-  if my_board.winner?(letter)
-    puts "Congratulations player #{letter} you have won!"
-    $win = 1
-  end
+#   if my_board.winner?(letter)
+#     puts "Congratulations player #{letter} you have won!"
+#     $win = 1
+#   end
 
-  if my_board.full?
-    puts "It's a draw, no one has won."
-    $win = 1
-  end
-end
+#   if my_board.full?
+#     puts "It's a draw, no one has won."
+#     $win = 1
+#   end
+# end
